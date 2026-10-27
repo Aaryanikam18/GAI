@@ -1,73 +1,109 @@
-# 🎨 Experiment 4 — Text-to-Image Generation using Stable Diffusion XL
+# 🧠 Experiment 5 — Variational Autoencoder (VAE) for MNIST Image Generation
 
-Generate AI-powered images from natural language prompts using a **pre-trained Stable Diffusion XL** model from Hugging Face Diffusers.
+A Generative AI project that implements a **Variational Autoencoder (VAE)** using **TensorFlow/Keras** to learn the latent representation of handwritten digits from the MNIST dataset and generate new MNIST-like images.
 
 ---
 
 ## 🌟 About
 
-This experiment implements a **Text-to-Image Generation** system using a pre-trained diffusion model. The application converts user-provided text prompts into high-quality images and provides an interactive interface using **Gradio** for real-time image generation.
+This experiment demonstrates how a **Variational Autoencoder (VAE)** can learn a compressed probabilistic representation of images and generate entirely new handwritten digits by sampling from the learned latent space. The project also includes a simple **Flask web application** for generating images using the trained decoder model.
 
 ## 🎯 Aim
 
-To implement a Generative AI image-generation system using a pre-trained diffusion model and generate images based on natural-language prompts.
+To implement a Variational Autoencoder (VAE) using TensorFlow/Keras, train it on the MNIST handwritten digit dataset, and generate new MNIST-like images using the learned latent space and trained decoder.
 
-## 🚀 Features
+## ✨ Key Features
 
-* Generate images from text prompts.
-* Use the **Stable Diffusion XL (SDXL)** pre-trained model.
-* Customize image generation using inference steps and guidance scale.
-* Interactive web interface built with **Gradio**.
-* GPU acceleration support for faster image generation in Google Colab.
+* Train a Variational Autoencoder on the MNIST dataset.
+* Learn a **2-dimensional latent space** representation of handwritten digits.
+* Implement the **Reparameterization Trick** for latent vector sampling.
+* Visualize reconstructed images and latent space embeddings.
+* Generate new handwritten digits from random latent vectors.
+* Save and reuse trained encoder and decoder models.
+* Deploy the trained decoder through a simple Flask interface.
 
 ## 🛠️ Tech Stack
 
-| Technology             | Purpose                    |
-| ---------------------- | -------------------------- |
-| Python                 | Programming Language       |
-| PyTorch                | Deep Learning Framework    |
-| Hugging Face Diffusers | Stable Diffusion Pipeline  |
-| Transformers           | Model Dependencies         |
-| Accelerate             | Efficient GPU Execution    |
-| Safetensors            | Model Loading              |
-| Gradio                 | Interactive User Interface |
-| Google Colab           | Development Environment    |
+| Technology         | Purpose                       |
+| ------------------ | ----------------------------- |
+| Python             | Programming Language          |
+| TensorFlow / Keras | Building and training the VAE |
+| NumPy              | Numerical computations        |
+| Matplotlib         | Visualization of results      |
+| Flask              | Web application backend       |
+| HTML/CSS           | Frontend interface            |
+| Google Colab       | Model training environment    |
 
-## ⚙️ How It Works
+## 🧩 VAE Architecture
 
-1. Load the pre-trained **Stable Diffusion XL** model.
-2. Accept a natural-language prompt from the user.
-3. Generate an image using the diffusion pipeline.
-4. Display the generated image through a Gradio interface.
-5. Experiment with different prompts and generation parameters to observe output variations.
+The implemented Variational Autoencoder consists of three main components:
+
+* **Encoder** – Converts a 28×28 MNIST image into latent parameters (`z_mean` and `z_log_var`).
+* **Latent Space** – Samples latent vectors using the Reparameterization Trick.
+* **Decoder** – Reconstructs or generates new handwritten digit images from latent vectors.
+
+## ⚙️ Project Workflow
+
+1. Load and preprocess the MNIST dataset.
+2. Normalize image pixel values.
+3. Build the Encoder and Decoder networks.
+4. Implement latent space sampling using the Reparameterization Trick.
+5. Train the VAE using Reconstruction Loss and KL Divergence.
+6. Visualize training loss and latent space distribution.
+7. Generate reconstructed and new handwritten digit images.
+8. Save the trained encoder and decoder models.
+9. Run the Flask application for interactive image generation.
 
 ## 📂 Repository Structure
 
 ```text
-EXP4/
-├── Text-to-Image.ipynb
-├── generated_images/
-├── README.md
+EXP5/
+├── app.py                  # Flask application
+├── index.html              # Web interface
+├── templates/              # HTML templates
+├── vae_mnist_models/       # Saved encoder and decoder models
+├── vae_mnist_models.zip    # Archived trained models
+├── Experiment5.ipynb       # Google Colab notebook
+└── README.md
 ```
 
-## 💡 Sample Prompt
+## ▶️ Running the Project
 
-```text
-A futuristic city at sunset with flying cars, cinematic lighting, ultra-realistic, 8K.
+### 1. Install Dependencies
+
+```bash
+pip install tensorflow flask numpy matplotlib
 ```
 
-## 📸 Output
+### 2. Start the Flask Application
 
-The notebook generates AI-created images based on user prompts. Different prompts and parameter values produce unique visual results using the same pre-trained diffusion model.
+```bash
+python app.py
+```
+
+### 3. Open the Application
+
+Visit the local server displayed in the terminal (usually `http://127.0.0.1:5000`) to generate new MNIST-like handwritten digits using the trained decoder.
+
+## 📊 Results
+
+The project demonstrates:
+
+* Reconstruction of original MNIST images.
+* Visualization of a 2D latent space.
+* Generation of new handwritten digits from randomly sampled latent vectors.
+* Interactive image generation through a Flask interface.
 
 ## 📖 Learning Outcomes
 
-* Understand the basics of diffusion-based image generation.
-* Learn prompt engineering for text-to-image models.
-* Implement Stable Diffusion XL using Hugging Face Diffusers.
-* Build an interactive image-generation application with Gradio.
+After completing this experiment, you will be able to:
+
+* Understand the working principle of a Variational Autoencoder.
+* Implement latent space sampling using the Reparameterization Trick.
+* Train a VAE using TensorFlow/Keras.
+* Generate new images from a learned latent distribution.
+* Deploy a trained Generative AI model using Flask.
 
 ## ✅ Conclusion
 
-This experiment demonstrates how modern diffusion models transform natural-language descriptions into images. It provides hands-on experience with Stable Diffusion XL, prompt engineering, and interactive Generative AI applications.
-
+This experiment provides hands-on experience with Variational Autoencoders and latent space learning for image generation. It demonstrates how probabilistic generative models can create new data samples and forms a strong foundation for more advanced Generative AI models such as GANs and diffusion models.
